@@ -1,0 +1,17 @@
+name: file_merger
+services:
+
+  db:
+    container_name: postgres_db
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - ./create_table.sql:/docker-entrypoint-initdb.d/create_table.sql
+
+      - postgres-data:/var/lib/postgresql/merge_app
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
